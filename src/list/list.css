@@ -42,7 +42,7 @@ html {
     border-width: 1px 1px 0 1px;
   }
   .list {
-    display: none;
+    /* display: none; */
   }
   .list .filter {
     margin: 1rem 0;

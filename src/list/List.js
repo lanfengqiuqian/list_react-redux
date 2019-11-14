@@ -13,7 +13,10 @@ class List extends React.Component {
         super(props);
         this.state = {
             // 用于控制计算器和列表的显示和隐藏
-            isList: false
+            isList: false,
+            // 通过控制类名控制nav的css样式
+            nav_css_calculator: "current",
+            nav_css_list: "",
         };
         this.toCalculator = this.toCalculator.bind(this);
         this.toList = this.toList.bind(this);
@@ -21,12 +24,20 @@ class List extends React.Component {
 
     // 切换到计算器方法
     toCalculator() {
-        this.setState({isList: false})
+        this.setState({
+            isList: false,
+            nav_css_calculator: "current",
+            nav_css_list: ""
+        })
     }
 
     // 切换到列表方法
     toList() {
-        this.setState({isList: true})
+        this.setState({
+            isList: true,
+            nav_css_calculator: "",
+            nav_css_list: "current"
+        })
     }
 
     render() {
@@ -47,16 +58,19 @@ class List extends React.Component {
             <div className="box">
                 {/* 标题部分 */}
                 <div className="title">
-                    <span id="flag">每天进步一点点,离目标更近一点点</span>
+                    <span id="flag">每天进步一点点,离目标更近一点点!</span>
                     <span id="logout">退出</span>
-                    <span id="username">crystal</span>
+                    <span id="username">段惠乾</span>
                 </div>
                 {/* 标题部分 */}
                 {/* 导航部分 */}
                 <div className="nav">
-                    <span id="calculator" onClick={this.toCalculator} className="current">首页</span>
-                    <span id="list" onClick={this.toList}>收入分析</span>
-                    <span>营销转化分析</span>
+                    <span id="calculator" onClick={this.toCalculator} className={this.state.nav_css_calculator}>首页</span>
+                    <span id="list" onClick={this.toList} className={this.state.nav_css_list}>收入分析</span>
+                    <span>
+                        <label>营销转化分析</label>
+                        <label>α</label>
+                    </span>
                     <span>广告管理</span>
                     <span>系统分析</span>
                     <span>用户管理</span>

@@ -25,10 +25,6 @@ class ListPortion extends React.Component {
         this.getAll();
     }
 
-    componentWillUnmount() {
-
-    }
-
     // 查询所有数据方法
     getAll() {
         // 参数拼接到地址栏
@@ -130,6 +126,7 @@ class ListPortion extends React.Component {
                     {/* <!-- 日期过滤 --> */}
                     日期选择
                     <input type="date" />
+                    -
                     <input type="date" />
                     {/* <!-- /日期过滤 --> */}
                     {/* <!-- 查询 --> */}
@@ -149,7 +146,7 @@ class ListPortion extends React.Component {
                             <tr>
                                 <th>客户id</th>
                                 <th>创建时间</th>
-                                <th>花费</th>
+                                <th>花费(元)</th>
                                 <th>开放id</th>
                                 <th>姓名</th>
                                 <th>类型</th>

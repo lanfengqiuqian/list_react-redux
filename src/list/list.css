@@ -9,7 +9,7 @@ html {
     padding: 0 0.5rem;
   }
   .title {
-    color: #a7e09e;
+    color: #4ab933;
     background: #edffea;
     text-indent: 1rem;
     line-height: 3rem;
@@ -22,10 +22,16 @@ html {
     margin: 0 2rem;
     color: #3aa3f0;
   }
+  .title span:nth-child(3) {
+    color: #4ab933;
+  }
   .nav {
     border-bottom: 1px solid #ccc;
-    line-height: 2rem;
+    line-height: 1.5rem;
     display: flex;
+    font-size: 14px;
+    margin-top: 1rem;
+    color: #797979;
   }
   .nav span {
     flex: none;
@@ -40,36 +46,49 @@ html {
   .nav .current {
     border: 1px solid #ccc;
     border-width: 1px 1px 0 1px;
+    font-weight: bold;
+    color: #3aa3f0;
+  }
+  .nav span label:last-child {
+    color: red;
+    padding-left: .3rem;
   }
   .list {
     /* display: none; */
   }
   .list .filter {
     margin: 1rem 0;
+    font-size: 14px;
   }
   .list .filter select {
-    width: 8rem;
-    height: 2rem;
-    line-height: 2rem;
+    width: 115px;
+    height: 26px;
+    line-height: 30px;
     background: #fff;
+    margin: 0 12px;
+    color: #6b6b6b;
   }
   .list .filter input {
-    height: calc(2rem - 4px);
+    margin: .5rem;
     outline: none;
+    font-weight: bold;
   }
   .list .filter button {
     background: #3aa3f0;
     color: #fff;
-    height: 2rem;
-    line-height: 2rem;
+    line-height: 1.5rem;
     width: 4rem;
-    border-radius: 5px;
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 15px;
+    margin-right: .2rem;
   }
   .list .table table {
     width: 100%;
     border-collapse: collapse;
     text-align: center;
     border-spacing: 0px;
+    font-size: 14px;
   }
   .list .table table .thead {
     background: #ededed;
@@ -86,16 +105,17 @@ html {
     color: #3aa3f0;
   }
   .list .table .paging {
-    text-align: center;
+    text-align: right;
   }
   .list .table .paging .wrapper {
     display: inline-block;
-    margin: 0 auto;
+    margin: 10px 210px 10px auto;
   }
   .list .table .paging .wrapper span:nth-child(1),
   .list .table .paging .wrapper span:nth-child(5) {
     color: #3aa3f0;
     cursor: pointer;
+    margin: 0 10px;
   }
   .calculator {
     display: block;
@@ -169,7 +189,7 @@ html {
     position: relative;
     left: calc(50% - 50px);
     top: calc(50% - 50px);
-    display: none;
+    /* display: none; */
   }
   .load div {
     display: block;

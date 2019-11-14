@@ -1,9 +1,9 @@
 import React from 'react'
 
 // 导入子组件
-import Loading from './Loading'
-import View from './View'
-import Key from './Key'
+import Loading from './components/Loading'
+import View from './components/View'
+import Key from './components/Key'
 
 class Calculator extends React.Component {
     constructor(props) {

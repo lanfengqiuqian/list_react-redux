@@ -1,11 +1,11 @@
 import React from 'react'
 
 // 导入css样式文件
-import './list.css'
+import '../css/list.css'
 
 // 导入子组件
-import ListPortion from './list/ListPortion'
-import Calculator from './calculator/Calculator'
+import ListPortion from '../list/ListPortion'
+import Calculator from '../calculator/Calculator'
 
 
 class List extends React.Component {

@@ -19,11 +19,12 @@ html {
   .title span:nth-child(3) {
     float: right;
     cursor: pointer;
-    margin: 0 2rem;
+    margin: 0 .3rem;
     color: #3aa3f0;
   }
   .title span:nth-child(3) {
     color: #4ab933;
+    margin: 0 2rem;
   }
   .nav {
     border-bottom: 1px solid #ccc;

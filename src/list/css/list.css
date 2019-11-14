@@ -90,6 +90,7 @@ html {
     text-align: center;
     border-spacing: 0px;
     font-size: 14px;
+    border: 1px solid #ededed;
   }
   .list .table table .thead {
     background: #ededed;
@@ -98,7 +99,7 @@ html {
   }
   .list .table table tbody tr td {
     line-height: 2rem;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ededed;
     border-collapse: collapse;
   }
   .list .table table tbody tr td#customer_id,
@@ -107,6 +108,8 @@ html {
   }
   .list .table .paging {
     text-align: right;
+    border: 1px solid #ededed;
+    border-width: 0 1px 1px;
   }
   .list .table .paging .wrapper {
     display: inline-block;

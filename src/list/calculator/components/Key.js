@@ -3,35 +3,11 @@ import React from 'react'
 class Key extends React.Component {
     constructor(props) {
         super(props);
-        // 数字区域方法
-        this.numHandle = this.numHandle.bind(this);
-        // 拼接方法
-        this.joint = this.joint.bind(this);
-        // 清空方法
-        this.clear = this.clear.bind(this);
-        // 计算方法
-        this.operation = this.operation.bind(this);
-        // 百分号方法
-        this.percent = this.percent.bind(this);
-        // 反向方法
-        this.reverse = this.reverse.bind(this);
-        // 最终显示结果和加载条方法
-        this.finally = this.finally.bind(this);       
-    }
-
-    // 生命周期方法
-    componentDidMount() {
-
-    }
-
-    // 数字区域方法
-    numHandle(number) {
-        // 调用拼接方法
-        this.joint(number);
+        this.state = {};
     }
 
     // 拼接方法
-    joint(str) {
+    joint = (str) => {
         // 判断拼接left还是right
         if(this.props.payload.change) {
             // 设置一个中间变量来表示right
@@ -55,7 +31,7 @@ class Key extends React.Component {
     }
 
     // 清空所有数据方法
-    clear() {
+    clear = () => {
         // 清空数据
         this.props.foo({
             left: 0,
@@ -67,7 +43,7 @@ class Key extends React.Component {
     }
 
     // 运算方法,传一个运算符进来
-    operation(ope) {
+    operation = (ope) => {
         // 判断left是否有值
         if(this.props.payload.left) {
             // 判断right是否有值
@@ -104,20 +80,16 @@ class Key extends React.Component {
             }
             // 判断运算符是否为等于号
             if(!(ope === '=')) {
-                // 将运算符赋给operator
-                this.props.foo({
-                    operator: ope
-                })
+                // 将运算符赋给operator,不需要调用getState
+                this.props.payload.operator = ope;
             }
-            // 改变拼接位置
-            this.props.foo({
-                change: true
-            })
+            // 改变拼接位置,由于不需要在视觉上更新,所以不调用getState
+            this.props.payload.change = true;
         }
     }
 
     // 最终显示结果和加载条方法,参数为需要显示的数
-    finally(tmp) {
+    finally = (tmp) => {
         // 显示加载条和模态框
         this.props.foo({
             loading: true,
@@ -138,7 +110,7 @@ class Key extends React.Component {
     }
 
     // 百分号方法
-    percent() {
+    percent = () => {
         // 判断是left还是right
         if(this.props.payload.left) {
             if(this.props.payload.right) {
@@ -158,7 +130,7 @@ class Key extends React.Component {
     }
 
     // 符号反向方法
-    reverse() {
+    reverse = () => {
         // 判断是left还是right
         if(this.props.payload.left) {
             if(this.props.payload.right) {
@@ -185,20 +157,20 @@ class Key extends React.Component {
                 <div onClick={() => this.reverse()}>+/-</div>
                 <div onClick={() => this.percent()}>%</div>
                 <div onClick={() => this.operation("/")}>÷</div>
-                <div onClick={() => this.numHandle("7")}>7</div>
-                <div onClick={() => this.numHandle("8")}>8</div>
-                <div onClick={() => this.numHandle("9")}>9</div>
+                <div onClick={() => this.joint("7")}>7</div>
+                <div onClick={() => this.joint("8")}>8</div>
+                <div onClick={() => this.joint("9")}>9</div>
                 <div onClick={() => this.operation("*")}>x</div>
-                <div onClick={() => this.numHandle("4")}>4</div>
-                <div onClick={() => this.numHandle("5")}>5</div>
-                <div onClick={() => this.numHandle("6")}>6</div>
+                <div onClick={() => this.joint("4")}>4</div>
+                <div onClick={() => this.joint("5")}>5</div>
+                <div onClick={() => this.joint("6")}>6</div>
                 <div onClick={() => this.operation("-")}>-</div>
-                <div onClick={() => this.numHandle("1")}>1</div>
-                <div onClick={() => this.numHandle("2")}>2</div>
-                <div onClick={() => this.numHandle("3")}>3</div>
+                <div onClick={() => this.joint("1")}>1</div>
+                <div onClick={() => this.joint("2")}>2</div>
+                <div onClick={() => this.joint("3")}>3</div>
                 <div onClick={() => this.operation("+")}>+</div>
-                <div onClick={() => this.numHandle("0")}>0</div>
-                <div onClick={() => this.numHandle(".")}>.</div>
+                <div onClick={() => this.joint("0")}>0</div>
+                <div onClick={() => this.joint(".")}>.</div>
                 <div onClick={() => this.operation("=")}>=</div>
             </div>
         );

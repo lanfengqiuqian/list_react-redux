@@ -24,12 +24,10 @@ class Calculator extends React.Component {
             // 控制模态框透明度
             opacity: 1,
         }
-        // 修改状态方法
-        this.mySetState = this.mySetState.bind(this);
     }
 
-    // 修改状态方法
-    mySetState(obj) {
+    // 修改状态方法,obj为需要修改的属性集合
+    mySetState = (obj) => {
         this.setState(obj);
     }
 

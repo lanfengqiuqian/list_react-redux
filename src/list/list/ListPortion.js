@@ -1,6 +1,8 @@
 import React from 'react'
 
 // 导入子组件
+import ListPaging from './components/ListPaging';
+import ListFilter from './components/ListFilter'
 
 class ListPortion extends React.Component {
     constructor(props) {
@@ -14,10 +16,6 @@ class ListPortion extends React.Component {
             num: 15,
             listItems: [],
         }
-        this.next_page = this.next_page.bind(this);
-        this.last_page = this.last_page.bind(this);
-        this.getAll = this.getAll.bind(this);
-        this.filter_page = this.filter_page.bind(this);
     }
 
     // 组件已经渲染到DOM后运行
@@ -26,10 +24,13 @@ class ListPortion extends React.Component {
     }
 
     // 查询所有数据方法
-    getAll() {
-        // 参数拼接到地址栏
+
+    getAll = () => {
+        // 固定this指向,避免后面then的多重嵌套指向错误
         let that = this;
-        let url = 'http://pre.zhushang.net/Supplychain/getDataForHavePost?type=1&page='+this.state.current_page+'&num='+this.state.num;
+        // 参数拼接到地址栏
+        let { current_page, num } = that.state;
+        let url = 'http://pre.zhushang.net/Supplychain/getDataForHavePost?type=1&page='+current_page+'&num='+num;
         fetch(url)
         .then(function(response) {
             // 判断查询到的数据是否异常
@@ -46,7 +47,7 @@ class ListPortion extends React.Component {
                     <tr key={item.id}>
                         <td id="customer_id">{item.id}</td>
                         <td>{item.create_time}</td>
-                        <td>{item.pay_money}</td>
+                        <td>{item.pay_money}(元)</td>
                         <td>{item.openid}</td>
                         <td>{item.name}</td>
                         <td>{item.type}</td>
@@ -68,75 +69,16 @@ class ListPortion extends React.Component {
         })        
     }
 
-    // 下一页方法
-    next_page() {
-        // 总页数
-        let total_pages = Math.ceil(256 / this.state.current_page);
-        // 判断边界
-        if(this.state.current_page < total_pages) {
-            // 当前页数加一
-            this.setState({
-                current_page: this.state.current_page + 1,
-            })
-            // 重新渲染数据
-            this.getAll();
-        }
+    // 修改状态方法,obj为需要修改的属性,foo为需要执行的回调函数
+    mySetState = (obj, foo) => {
+        this.setState(obj, foo);
     }
 
-    // 上一页方法
-    last_page() {
-        // 判断边界
-        if(this.state.current_page > 1) {
-            // 当前页数加一
-            this.setState({
-                current_page: this.state.current_page - 1,
-            })
-            // 重新渲染数据
-            this.getAll();
-        }
-    }
-
-    // 过滤页数方法
-    filter_page(event) {
-        // 设置显示条数,并且重新渲染数据
-        this.setState({num: parseInt(event.target.value)},() => {
-            this.getAll();
-        })
-    }
-    
     render() {
         return (
             <div className="list">
                 {/* 过滤部分 */}
-                <div className="filter">
-                    {/* <!-- 类型过滤 --> */}
-                    <select>
-                        <option>交易</option>
-                        <option>非交易</option>
-                    </select>
-                    {/* <!-- /类型过滤 --> */}
-                    {/* <!-- 分页过滤 --> */}
-                    <select className="page_filter" id="page" onChange={this.filter_page}>
-                        <option value="15">15</option>
-                        <option value="10">10</option>
-                        <option value="8">8</option>
-                        <option value="5">5</option>
-                    </select>
-                    {/* <!-- /分页过滤 --> */}
-                    {/* <!-- 日期过滤 --> */}
-                    日期选择
-                    <input type="date" />
-                    -
-                    <input type="date" />
-                    {/* <!-- /日期过滤 --> */}
-                    {/* <!-- 查询 --> */}
-                    <button id="search">查询</button>
-                    {/* <!-- /查询 --> */}
-                    {/* <!-- 同步 --> */}
-                    <button>同步</button>
-                    {/* <!-- /同步 --> */}
-                    <span>交易上次手动同步时间: 2019-09-25 10:09:36</span>
-                </div>
+                <ListFilter payload={this.state} getAll={this.getAll} mySetState={this.mySetState} />
                 {/* /过滤部分 */}
                 {/* 表格部分 */}
                 <div className="table">
@@ -165,15 +107,7 @@ class ListPortion extends React.Component {
                     </table>
                     {/* /表格主体部分 */}
                     {/* 分页部分 */}
-                    <div className="paging">
-                        <div className="wrapper">
-                            <span id="last_page" onClick={this.last_page}>上一页</span>
-                            <span id="current_page">{this.state.current_page}</span>
-                            <span>/</span>
-                            <span id="total_pages">{Math.ceil(256 / this.state.num)}</span>
-                            <span id="next_page" onClick={this.next_page}>下一页</span>
-                        </div>
-                    </div>
+                    <ListPaging payload={this.state} getAll={this.getAll} mySetState={this.mySetState} />
                     {/* /分页部分 */}
                 </div>
                 {/* /表格部分 */}

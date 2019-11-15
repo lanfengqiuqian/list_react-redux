@@ -54,9 +54,6 @@ html {
     color: red;
     padding-left: .3rem;
   }
-  .list {
-    /* display: none; */
-  }
   .list .filter {
     margin: 1rem 0;
     font-size: 14px;

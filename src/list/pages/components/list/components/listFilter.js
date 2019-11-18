@@ -7,7 +7,7 @@ class ListFilter extends React.Component {
     }
 
     // 过滤页数方法
-    filter_page = (event) => {
+    filterPage = (event) => {
         console.log("2232",event.target.value)
         let tmp = event.target.value;
         // 设置显示条数,并且重新渲染数据
@@ -27,7 +27,7 @@ class ListFilter extends React.Component {
                 </select>
                 {/* <!-- /类型过滤 --> */}
                 {/* <!-- 分页过滤 --> */}
-                <select className="page_filter" id="page" onChange={this.filter_page}>
+                <select className="pageFilter" id="page" onChange={this.filterPage}>
                     <option value="15" >15</option>
                     <option value="10">10</option>
                     <option value="8">8</option>

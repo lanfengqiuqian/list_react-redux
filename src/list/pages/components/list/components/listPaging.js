@@ -7,14 +7,14 @@ class ListPaging extends React.Component {
     }
 
     // 下一页方法
-    next_page = () => {
+    nextPage = () => {
         // 总页数
-        let total_pages = Math.ceil(256 / this.props.payload.current_page);
+        let totalPages = Math.ceil(256 / this.props.payload.currentPage);
         // 判断边界
-        if(this.props.payload.current_page < total_pages) {
+        if(this.props.payload.currentPage < totalPages) {
             // 当前页数加一
             this.props.mySetState({
-                current_page: this.props.payload.current_page + 1,
+                currentPage: this.props.payload.currentPage + 1,
             })
             // 重新渲染数据
             this.props.getAll();
@@ -22,12 +22,12 @@ class ListPaging extends React.Component {
     }
 
     // 上一页方法
-    last_page = () => {
+    lastPage = () => {
         // 判断边界
-        if(this.props.payload.current_page > 1) {
+        if(this.props.payload.currentPage > 1) {
             // 当前页数加一
             this.props.mySetState({
-                current_page: this.props.payload.current_page - 1,
+                currentPage: this.props.payload.currentPage - 1,
             })
             // 重新渲染数据
             this.props.getAll();
@@ -38,11 +38,11 @@ class ListPaging extends React.Component {
         return (
             <div className="paging">
                 <div className="wrapper">
-                    <span id="last_page" onClick={this.last_page}>上一页</span>
-                    <span id="current_page">{this.props.payload.current_page}</span>
+                    <span id="lastPage" onClick={this.lastPage}>上一页</span>
+                    <span id="currentPage">{this.props.payload.currentPage}</span>
                     <span>/</span>
-                    <span id="total_pages">{Math.ceil(256 / this.props.payload.num)}</span>
-                    <span id="next_page" onClick={this.next_page}>下一页</span>
+                    <span id="totalPages">{Math.ceil(256 / this.props.payload.num)}</span>
+                    <span id="nextPage" onClick={this.nextPage}>下一页</span>
                 </div>
             </div>
         )

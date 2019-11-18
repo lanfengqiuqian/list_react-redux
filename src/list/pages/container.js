@@ -4,9 +4,9 @@ import React from 'react'
 import '../css/list.css'
 
 // 导入子组件
-import ListPortion from '../list/ListPortion'
-import Calculator from '../calculator/Calculator'
-
+import ListPortion from './components/list/container'
+import Calculator from './components/calculator/container'
+import Header from './components/header/header'
 
 class List extends React.Component {
     constructor(props) {
@@ -46,23 +46,17 @@ class List extends React.Component {
         if(this.state.isList) {
             // {/* 列表部分 */}
             showItem = <ListPortion></ListPortion>
-            // {/* /列表部分 */}
         } else {
             // {/* 计算器部分 */}
             showItem = <Calculator></Calculator>
-            // {/* /计算器部分 */}
         }
 
         return (
             // 外框部分
             <div className="box">
-                {/* 标题部分 */}
-                <div className="title">
-                    <span id="flag">每天进步一点点,离目标更近一点点!</span>
-                    <span id="logout">退出</span>
-                    <span id="username">段惠乾</span>
-                </div>
-                {/* 标题部分 */}
+                {/* 头部分 */}
+                <Header />
+                {/* 头部分 */}
                 {/* 导航部分 */}
                 <div className="nav">
                     <span id="calculator" onClick={this.toCalculator} className={this.state.nav_css_calculator}>首页</span>

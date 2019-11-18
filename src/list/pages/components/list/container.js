@@ -1,8 +1,8 @@
 import React from 'react'
 
 // 导入子组件
-import ListPaging from './components/ListPaging';
-import ListFilter from './components/ListFilter'
+import ListPaging from './components/listPaging';
+import ListFilter from './components/listFilter'
 
 class ListPortion extends React.Component {
     constructor(props) {
@@ -11,7 +11,7 @@ class ListPortion extends React.Component {
             // 查询到的列表数据
             lists: [],
             // 当前页
-            current_page : 1,
+            currentPage : 1,
             // 一页显示条数
             num: 15,
             listItems: [],
@@ -29,8 +29,8 @@ class ListPortion extends React.Component {
         // 固定this指向,避免后面then的多重嵌套指向错误
         let that = this;
         // 参数拼接到地址栏
-        let { current_page, num } = that.state;
-        let url = 'http://pre.zhushang.net/Supplychain/getDataForHavePost?type=1&page='+current_page+'&num='+num;
+        let { currentPage, num } = that.state;
+        let url = 'http://pre.zhushang.net/Supplychain/getDataForHavePost?type=1&page='+currentPage+'&num='+num;
         fetch(url)
         .then(function(response) {
             // 判断查询到的数据是否异常
@@ -45,7 +45,7 @@ class ListPortion extends React.Component {
             let items = myJson.map(item => {
                 return (
                     <tr key={item.id}>
-                        <td id="customer_id">{item.id}</td>
+                        <td id="customerId">{item.id}</td>
                         <td>{item.create_time}</td>
                         <td>{item.pay_money}(元)</td>
                         <td>{item.openid}</td>

@@ -99,7 +99,7 @@ html {
     border-bottom: 1px solid #ededed;
     border-collapse: collapse;
   }
-  .list .table table tbody tr td#customer_id,
+  .list .table table tbody tr td#customerId,
   .list .table table tbody tr td#origin {
     color: #3aa3f0;
   }
@@ -179,7 +179,7 @@ html {
   .calculator .wrap .key div::nth-child(n + 16) {
     border-bottom-width: 0px;
   }
-  .calculator .wrap .key div.current_key {
+  .calculator .wrap .key div.currentKey {
     background: #bbb;
   }
   .load {

@@ -1,4 +1,6 @@
 import React from 'react'
+// import store from '../store/index'
+import { connect } from 'react-redux'
 
 // 导入css样式文件
 import '../css/list.css'
@@ -7,43 +9,16 @@ import '../css/list.css'
 import ListPortion from './components/list/container'
 import Calculator from './components/calculator/container'
 import Header from './components/header/header'
+import Nav from './components/nav/nav'
 
-class List extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            // 用于控制计算器和列表的显示和隐藏
-            isList: false,
-            // 通过控制类名控制nav的css样式
-            nav_css_calculator: "current",
-            nav_css_list: "",
-        };
-        this.toCalculator = this.toCalculator.bind(this);
-        this.toList = this.toList.bind(this);
-    }
 
-    // 切换到计算器方法
-    toCalculator() {
-        this.setState({
-            isList: false,
-            nav_css_calculator: "current",
-            nav_css_list: ""
-        })
-    }
 
-    // 切换到列表方法
-    toList() {
-        this.setState({
-            isList: true,
-            nav_css_calculator: "",
-            nav_css_list: "current"
-        })
-    }
-
+export class List extends React.Component {
     render() {
         // 一个用来控制列表和计算器的显示和隐藏的变量
         let showItem ;
-        if(this.state.isList) {
+        // if(store.getState().tabTo.isList) {
+        if(this.props.isList) {
             // {/* 列表部分 */}
             showItem = <ListPortion></ListPortion>
         } else {
@@ -58,18 +33,7 @@ class List extends React.Component {
                 <Header />
                 {/* 头部分 */}
                 {/* 导航部分 */}
-                <div className="nav">
-                    <span id="calculator" onClick={this.toCalculator} className={this.state.nav_css_calculator}>首页</span>
-                    <span id="list" onClick={this.toList} className={this.state.nav_css_list}>收入分析</span>
-                    <span>
-                        <label>营销转化分析</label>
-                        <label>α</label>
-                    </span>
-                    <span>广告管理</span>
-                    <span>系统分析</span>
-                    <span>用户管理</span>
-                    <span>快捷工具</span>
-                </div>
+                <Nav />
                 {/* /导航部分 */}
                 {/* 计算器和列表部分 */}
                 {showItem}
@@ -81,4 +45,18 @@ class List extends React.Component {
 
 }
 
-export default List;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        isList: state.tabTo.isList,
+        navCssCalculator: state.tabTo.navCssCalculator,
+        navCssList: state.tabTo.navCssList
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(List);

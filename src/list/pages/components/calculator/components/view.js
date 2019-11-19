@@ -1,19 +1,21 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 class View extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
-    }
-
     render() {
         return (
             <div className="view">
                 {/* 将需要显示的数据绑定为result */}
-                <span id="real_view">{this.props.payload.result}</span>
+                <span id="realView">{this.props.result}</span>
             </div>
         );
     }
 }
 
-export default View;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        result: state.calculatorMethods.result
+    }
+}
+
+export default connect(mapStateToProps, null)(View);

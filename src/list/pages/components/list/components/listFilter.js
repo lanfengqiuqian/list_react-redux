@@ -1,22 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
+import { filterPage, getAll } from '../../../../store/actions'
 
 class ListFilter extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-
-    // 过滤页数方法
-    filterPage = (event) => {
-        console.log("2232",event.target.value)
-        let tmp = event.target.value;
-        // 设置显示条数,并且重新渲染数据
-        this.props.mySetState({
-            num: parseInt(tmp)
-        }, this.props.getAll)
-
-    }    
-
     render() {
         return (
             <div className="filter">
@@ -27,7 +14,7 @@ class ListFilter extends React.Component {
                 </select>
                 {/* <!-- /类型过滤 --> */}
                 {/* <!-- 分页过滤 --> */}
-                <select className="pageFilter" id="page" onChange={this.filterPage}>
+                <select className="pageFilter" id="page" onChange={this.props.filterPage}>
                     <option value="15" >15</option>
                     <option value="10">10</option>
                     <option value="8">8</option>
@@ -53,4 +40,20 @@ class ListFilter extends React.Component {
     }
 }
 
-export default ListFilter;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        currentPage: state.listMethods.currentPage,
+        num: state.listMethods.num,
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        filterPage: (e) => {
+            dispatch(filterPage(e.target.value));
+            getAll()();
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(ListFilter);

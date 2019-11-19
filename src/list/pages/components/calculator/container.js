@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 // 导入子组件
 import Loading from './components/loading'
@@ -6,54 +7,33 @@ import View from './components/view'
 import Key from './components/key'
 
 class Calculator extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            // 结果
-            result: 0,
-            // 左边的数
-            left: 0,
-            // 右边的数
-            right: 0,
-            // 运算符号
-            operator: "",
-            // 控制left和right的拼接
-            change: false,
-            // 控制加载条的显示和隐藏
-            loading: false,
-            // 控制模态框透明度
-            opacity: 1,
-        }
-    }
-
-    // 修改状态方法,obj为需要修改的属性集合
-    mySetState = (obj) => {
-        this.setState(obj);
-    }
-
     render() {
         // 控制加载条的显示和隐藏
         let showLoading;
-        if(this.state.loading) {
+        if(this.props.loading) {
             showLoading = <Loading></Loading>
         }
         return (
             <div className="calculator">
                 {/* 加载条的模态框部分 */}
-                <div className="wrap" style={{opacity: this.state.opacity}}>
+                <div className="wrap" style={{opacity: this.props.opacity}}>
                     {/* 加载条区域 */}
                     {showLoading}
-                    {/* /加载条区域 */}
                     {/* 显示区域 */}
-                    <View payload={this.state} foo={this.mySetState} />
-                    {/* /显示区域 */}
+                    <View />
                     {/* 按键区域 将参数传给子组件 */}
-                    <Key payload={this.state} foo={this.mySetState} />
-                    {/* /按键区域 */}
+                    <Key />
                 </div>
             </div>
         )
     }
 }
 
-export default Calculator;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        loading: state.calculatorMethods.loading,
+        opacity: state.calculatorMethods.opacity,
+    }
+}
+
+export default connect(mapStateToProps, null)(Calculator);

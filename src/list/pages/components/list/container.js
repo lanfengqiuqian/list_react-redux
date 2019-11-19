@@ -1,4 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
+// 导入actions
+import { getAll } from '../../../store/actions'
 
 // 导入子组件
 import ListPaging from './components/listPaging';
@@ -20,65 +24,36 @@ class ListPortion extends React.Component {
 
     // 组件已经渲染到DOM后运行
     componentDidMount() {
-        this.getAll();
-    }
-
-    // 查询所有数据方法
-
-    getAll = () => {
-        // 固定this指向,避免后面then的多重嵌套指向错误
-        let that = this;
-        // 参数拼接到地址栏
-        let { currentPage, num } = that.state;
-        let url = 'http://pre.zhushang.net/Supplychain/getDataForHavePost?type=1&page='+currentPage+'&num='+num;
-        fetch(url)
-        .then(function(response) {
-            // 判断查询到的数据是否异常
-            if(response.status === 200){
-                return response.json();
-            } else {
-                alert("查询异常")
-            }
-        })
-        .then(function(myJson) {
-            // 列表渲染
-            let items = myJson.map(item => {
-                return (
-                    <tr key={item.id}>
-                        <td id="customerId">{item.id}</td>
-                        <td>{item.create_time}</td>
-                        <td>{item.pay_money}(元)</td>
-                        <td>{item.openid}</td>
-                        <td>{item.name}</td>
-                        <td>{item.type}</td>
-                        <td>{item.user_where}</td>
-                        <td>{item.package}</td>
-                        <td>{item.order_no}</td>
-                        <td>{item.expire_date}</td>
-                        <td>{item.phone}</td>
-                        <td>{item.zihao}</td>
-                        <td>{item.account}</td>
-                        <td>{item.password}</td>
-                        <td id="origin">分析</td>
-                    </tr>
-                )
-            })
-            that.setState({
-                listItems: items
-            })
-        })        
-    }
-
-    // 修改状态方法,obj为需要修改的属性,foo为需要执行的回调函数
-    mySetState = (obj, foo) => {
-        this.setState(obj, foo);
+        getAll()();
     }
 
     render() {
+        // 列表渲染jsx
+        let items = this.props.listItems.map(item => {
+            return (
+                <tr key={item.id}>
+                    <td id="customerId">{item.id}</td>
+                    <td>{item.create_time}</td>
+                    <td>{item.pay_money}(元)</td>
+                    <td>{item.openid}</td>
+                    <td>{item.name}</td>
+                    <td>{item.type}</td>
+                    <td>{item.user_where}</td>
+                    <td>{item.package}</td>
+                    <td>{item.order_no}</td>
+                    <td>{item.expire_date}</td>
+                    <td>{item.phone}</td>
+                    <td>{item.zihao}</td>
+                    <td>{item.account}</td>
+                    <td>{item.password}</td>
+                    <td id="origin">分析</td>
+                </tr>
+            )
+        })
         return (
             <div className="list">
                 {/* 过滤部分 */}
-                <ListFilter payload={this.state} getAll={this.getAll} mySetState={this.mySetState} />
+                <ListFilter payload={this.state} getAll={this.props.getAll} />
                 {/* /过滤部分 */}
                 {/* 表格部分 */}
                 <div className="table">
@@ -103,11 +78,11 @@ class ListPortion extends React.Component {
                                 <th>来源</th>
                             </tr>
                         </thead>
-                        <tbody>{this.state.listItems}</tbody>
+                        <tbody>{items}</tbody>
                     </table>
                     {/* /表格主体部分 */}
                     {/* 分页部分 */}
-                    <ListPaging payload={this.state} getAll={this.getAll} mySetState={this.mySetState} />
+                    <ListPaging />
                     {/* /分页部分 */}
                 </div>
                 {/* /表格部分 */}
@@ -116,4 +91,18 @@ class ListPortion extends React.Component {
     }
 }
 
-export default ListPortion;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        listItems: state.listMethods.listItems
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        // getAll: () => {
+        //     dispatch(getAll());
+        // },
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(ListPortion);

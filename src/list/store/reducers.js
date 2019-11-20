@@ -19,6 +19,7 @@ const tabTo = (state = initialState, action) => {
 const listMethods = (state = initialState, action) => {
     switch (action.type) {
         case 'getAll' :
+            console.log(2222)
             return Object.assign({}, JSON.parse(JSON.stringify(state)), action.data);
         case 'nextPage' :
             return Object.assign({}, JSON.parse(JSON.stringify(state)), action.data);
@@ -46,7 +47,9 @@ const calculatorMethods = (state = initialState, action) => {
             return Object.assign({}, JSON.parse(JSON.stringify(state)), action.data);
         case 'close' :
             return Object.assign({}, JSON.parse(JSON.stringify(state)), action.data);
-        case 'common' :
+        case 'change' :
+            return Object.assign({}, JSON.parse(JSON.stringify(state)), action.data);
+        case 'myEqual' :
             return Object.assign({}, JSON.parse(JSON.stringify(state)), action.data);
         default :
             return state;

@@ -47,13 +47,9 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        filterPage: (e) => {
-            dispatch(filterPage(e.target.value));
-            getAll()();
-        }
-    }
+const mapDispatchToProps = {
+    getAll,
+    filterPage
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(ListFilter);

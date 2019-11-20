@@ -31,31 +31,13 @@ class Key extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-
-    }
+const mapDispatchToProps = {
+    joint,
+    clear,
+    percent,
+    reverse,
+    operation
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        joint: (str) => {
-            dispatch(joint(str));
-        },
-        clear: () => {
-            dispatch(clear());
-        },
-        percent: () => {
-            dispatch(percent());
-        },
-        reverse: () => {
-            dispatch(reverse());
-        },
-        operation: (ope) => {
-            operation(ope);
-        }
-    }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(Key);
+export default connect(null,mapDispatchToProps)(Key);
 

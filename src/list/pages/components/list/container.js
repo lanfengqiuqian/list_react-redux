@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 // 导入actions
-import { getAll } from '../../../store/actions'
+import { firstGet, getAll } from '../../../store/actions'
 
 // 导入子组件
 import ListPaging from './components/listPaging';
@@ -24,7 +24,7 @@ class ListPortion extends React.Component {
 
     // 组件已经渲染到DOM后运行
     componentDidMount() {
-        getAll()();
+        // firstGet();
     }
 
     render() {
@@ -53,7 +53,7 @@ class ListPortion extends React.Component {
         return (
             <div className="list">
                 {/* 过滤部分 */}
-                <ListFilter payload={this.state} getAll={this.props.getAll} />
+                <ListFilter />
                 {/* /过滤部分 */}
                 {/* 表格部分 */}
                 <div className="table">
@@ -97,12 +97,8 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        // getAll: () => {
-        //     dispatch(getAll());
-        // },
-    }
+const mapDispatchToProps = {
+    getAll
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(ListPortion);

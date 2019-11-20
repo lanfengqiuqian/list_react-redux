@@ -6,6 +6,7 @@ import { toCalculator, toList } from '../../../store/actions'
 
 class Nav extends React.Component {
     render() { 
+
         return (
             <div className="nav">
                 <span id="calculator" onClick={this.props.toCalculator} className={this.props.navCssCalculator}>首页</span>
@@ -31,15 +32,9 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        toCalculator: () => {
-            dispatch(toCalculator());
-        },
-        toList: () => {
-            dispatch(toList());
-        }
-    }
+const mapDispatchToProps = {
+    toCalculator,
+    toList
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Nav);

@@ -28,17 +28,9 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        nextPage: () => {
-            dispatch(nextPage());
-            getAll()();
-        },
-        lastPage: () => {
-            dispatch(lastPage());
-            getAll()();
-        }
-    }
+const mapDispatchToProps = {
+    nextPage,
+    lastPage
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(ListPaging);
